@@ -36,4 +36,19 @@ describe Deep::Ignore::Order::Matcher do
 	it 'should ignore hash keys order' do
 		{ :a => 1, :b => 2 }.should be_deep_equal({ :b => 2, :a => 1 })
   end
+
+end
+
+describe "regular matcher" do
+
+  it 'should not ignore order in plain arrays' do
+    actual = Array.new(5) { Kernel.rand(1000) }
+    expected = actual.sort
+    actual.should_not == expected
+  end
+
+  it 'should ignore hash keys order' do
+    { :a => 1, :b => 2 }.should == ({ :b => 2, :a => 1 })
+  end
+
 end
